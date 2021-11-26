@@ -32,7 +32,7 @@ renderer.setSize(window.innerWidth, window.innerHeight);
 renderer.setClearColor(0x3a3b3c);
 document.body.appendChild(renderer.domElement);
 
-light = new THREE.PointLight(0xfff0f0, 2, 0, 2);
+light = new THREE.PointLight(0x1C2C4C, 2, 0, 2);
 light.castShadow = true;
 
 light.shadow.mapSize.width = 512;
