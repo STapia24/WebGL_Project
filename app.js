@@ -1,10 +1,10 @@
 let scene, camera, renderer, controls, light, listener, audioLoader, geometry, texture, material;
-let court, ball, net;
+let court, ball, net, ball1, ball2, ball3, ball4, ball5, ball6;
 
 const courtTexture = new THREE.TextureLoader().load('textures/CourtTexture0.jpg'),
 netTexture = new THREE.TextureLoader().load('textures/NetTexture.jpg'),
 ballTexture = new THREE.TextureLoader().load('textures/BallTexture.png'),
-domeTexture = new THREE.TextureLoader().load('textures/OutsideTexture.jpg'),
+domeTexture = new THREE.TextureLoader().load('textures/OutsideTexture.jfif'),
 floorTexture = new THREE.TextureLoader().load('textures/GrassTexture.jpg'),
 courtMaterial = new THREE.MeshStandardMaterial( {map: courtTexture, side: THREE.DoubleSide} ),
 netMaterial = new THREE.MeshBasicMaterial( {map: netTexture, side: THREE.DoubleSide} ),
@@ -13,7 +13,7 @@ domeMaterial = new THREE.MeshBasicMaterial( {map: domeTexture, side: THREE.BackS
 floorMaterial = new THREE.MeshStandardMaterial({map: floorTexture});
 
 const ballInitialZ = 13, 
-ballInitialY = 0.464,
+ballInitialY = 0.1,
 ballInitialX = 4.5;
 
 let directionX = -1,
@@ -32,7 +32,7 @@ renderer.setSize(window.innerWidth, window.innerHeight);
 renderer.setClearColor(0x3a3b3c);
 document.body.appendChild(renderer.domElement);
 
-light = new THREE.PointLight(0x1C2C4C, 2, 0, 2);
+light = new THREE.PointLight(0xffffff, 2, 0, 2);
 light.castShadow = true;
 
 light.shadow.mapSize.width = 512;
@@ -63,7 +63,7 @@ court.position.z = 0;
 court.receiveShadow = true;
 scene.add(court);
 
-// Tennis Ball
+// Moving Tennis Ball
 geometry = new THREE.SphereGeometry(0.12, 32, 16);
 ball = new THREE.Mesh(geometry, ballMaterial);
 ball.position.z = ballInitialZ;
@@ -72,11 +72,62 @@ ball.position.x = ballInitialX;
 ball.castShadow = true;
 scene.add(ball);
 
+//Static Ball 1
+geometry = new THREE.SphereGeometry(0.12, 32, 16);
+ball1 = new THREE.Mesh(geometry, ballMaterial);
+ball1.position.z = 22;
+ball1.position.y = 0.1;
+ball1.position.x = 0.3;
+ball1.castShadow = true;
+scene.add(ball1);
+
+// Static Ball 2
+geometry = new THREE.SphereGeometry(0.12, 32, 16);
+ball2 = new THREE.Mesh(geometry, ballMaterial);
+ball2.position.z = 22;
+ball2.position.y = 0.1;
+ball2.position.x = -0.2;
+ball2.castShadow = true;
+scene.add(ball2);
+
+//Static Ball 3
+geometry = new THREE.SphereGeometry(0.12, 32, 16);
+ball3 = new THREE.Mesh(geometry, ballMaterial);
+ball3.position.z = 21.6;
+ball3.position.y = 0.1;
+ball3.position.x = 0.1;
+ball3.castShadow = true;
+scene.add(ball3);
+
+geometry = new THREE.SphereGeometry(0.12, 32, 16);
+ball4 = new THREE.Mesh(geometry, ballMaterial);
+ball4.position.z = 21.6;
+ball4.position.y = 0.1;
+ball4.position.x = 0.5;
+ball4.castShadow = true;
+scene.add(ball4);
+
+geometry = new THREE.SphereGeometry(0.12, 32, 16);
+ball5 = new THREE.Mesh(geometry, ballMaterial);
+ball5.position.z = 21.5;
+ball5.position.y = 0.1;
+ball5.position.x = -0.5;
+ball5.castShadow = true;
+scene.add(ball5);
+
+geometry = new THREE.SphereGeometry(0.12, 32, 16);
+ball6 = new THREE.Mesh(geometry, ballMaterial);
+ball6.position.z = 21.1;
+ball6.position.y = 0.1;
+ball6.position.x = 0.1;
+ball6.castShadow = true;
+scene.add(ball6);
+
 // Ambient Dome
-geometry = new THREE.SphereGeometry(30, 32, 32);
+geometry = new THREE.SphereGeometry(30, 32, 32, 0, Math.PI * 2, 0, Math.PI / 2);
 const dome = new THREE.Mesh(geometry, domeMaterial);
 dome.position.x = 0;
-dome.position.y = 7;
+dome.position.y = 0;
 dome.position.z = 0;
 scene.add(dome);
 
@@ -84,6 +135,7 @@ camera.position.z = 20;
 camera.position.y = 3;
 
 geometry = new THREE.PlaneGeometry(60, 60);
+material = new THREE.MeshBasicMaterial( {color: 0x394571} )
 floor = new THREE.Mesh(geometry, floorMaterial);
 floor.rotation.x = -1 * Math.PI / 2;
 floor.rotation.z = -1 * Math.PI / 2;
@@ -118,7 +170,7 @@ const animate = function() {
 			}		
 		} 
 		else { 
-			ball.position.y = 0.464;
+			ball.position.y = 0.1;
 			directionZ = 1
 		}
 	} 
@@ -139,7 +191,7 @@ const animate = function() {
 			}		
 		}
 		else { 
-			ball.position.y = 0.464;
+			ball.position.y = 0.1;
 			directionZ = -1
 		}
 	} 
